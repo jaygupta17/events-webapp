@@ -8,11 +8,11 @@ import { z } from "zod";
 import { signup } from "@/actions/register";
 import { FieldError } from "./field-error";
 import { FormSuccess } from "./form-success";
+import Link from "next/link";
 
 export const RegisterForm = () =>{
     const [isPending,startTransition] = useTransition()
     const [error ,setError] = useState<string | undefined>("")
-    const [success ,setSuccess] = useState<string | undefined>("")
 
     const {register,handleSubmit , formState:{errors}} = useForm<z.infer<typeof RegisterSchema>>({
         resolver : zodResolver(RegisterSchema),
@@ -20,12 +20,12 @@ export const RegisterForm = () =>{
 
     const onsubmit = (values : z.infer<typeof RegisterSchema>) =>{
         setError("")
-        setSuccess("")
         startTransition(()=>{
 
             signup(values).then(data=>{
-                setError(data.error)
-                setSuccess(data.success)
+                if (data?.error) {
+                    setError(data.error)
+                }
             })
         })
     }
@@ -49,8 +49,8 @@ export const RegisterForm = () =>{
                {errors.password?.message && <FieldError message={errors.password.message} />}
                </div>
                 <FormError message={error}/>
-                <FormSuccess message={success}/>
-                <button type="submit" disabled={isPending} className="px-4 py-1 mt-2 disabled:bg-green-800 rounded-md bg-green-600 text-white font-semibold">Submit</button>
+                <button type="submit" disabled={isPending} className="px-4 py-1 mt-2 disabled:bg-green-800 rounded-md bg-green-600 text-white font-semibold">Register</button>
+                <Link href="/login" className="underline text-blue-500">Already Registered?</Link>
             </form>
         </div>
     )

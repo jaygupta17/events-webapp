@@ -6,6 +6,7 @@ import { RegisterSchema } from "@/schemas"
 import { ID } from "appwrite"
 import { cookies } from "next/headers"
 import { z } from "zod"
+import { redirect } from "next/navigation";
 
 export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
     const validated = RegisterSchema.safeParse(values)
@@ -22,7 +23,7 @@ export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
         secure:true
     })
     if (user) {
-        return{success: "Registered" , user}
+        redirect("/profile")
     }
     return{error:"Something went wrong"}
 }

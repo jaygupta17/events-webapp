@@ -10,16 +10,16 @@ export async function middleware(request: NextRequest) {
     const user =await getLoggedInUser()
   const isPublicRoute = publicRoutes.includes(request.url)
   const isAuthRoute = authRoutes.includes(request.url)
-  
-  if (!user && !isPublicRoute) {
-    return Response.redirect(new URL("/login",request.url))
-  }
   if (isAuthRoute) {
     if (user) {
-        return Response.redirect(new URL("/profile",request.url))
+        // return Response.redirect(new URL("/profile",request.url))
     }
     return null
   }
+  if (!user && !isPublicRoute) {
+    // return Response.redirect(new URL("/login",request.url))
+  }
+ 
   return null
 }
  

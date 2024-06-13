@@ -8,11 +8,12 @@ import { z } from "zod";
 import { login } from "@/actions/login";
 import { FieldError } from "./field-error";
 import { FormSuccess } from "./form-success";
+import Link from "next/link";
 
 export const LoginForm = () =>{
     const [isPending,startTransition] = useTransition()
     const [error ,setError] = useState<string | undefined>("")
-    const [success ,setSuccess] = useState<string | undefined>("")
+    // const [success ,setSuccess] = useState<string | undefined>("")
 
     const {register,handleSubmit , formState:{errors}} = useForm<z.infer<typeof LoginSchema>>({
         resolver : zodResolver(LoginSchema),
@@ -20,11 +21,12 @@ export const LoginForm = () =>{
 
     const onsubmit = (values : z.infer<typeof LoginSchema>) =>{
         setError("")
-        setSuccess("")
+        // setSuccess("")9
         startTransition(()=>{
             login(values).then(data=>{
-                setError(data.error)
-                setSuccess(data.success)
+                if (data?.error) {
+                    setError(data.error)
+                }
             })
         })
     }
@@ -43,8 +45,9 @@ export const LoginForm = () =>{
                {errors.password?.message && <FieldError message={errors.password.message} />}
                </div>
                 <FormError message={error}/>
-                <FormSuccess message={success}/>
-                <button type="submit" disabled={isPending} className="px-4 py-1 mt-2 disabled:bg-green-800 rounded-md bg-green-600 text-white font-semibold">Submit</button>
+                {/* <FormSuccess message={success}/> */}
+                <button type="submit" disabled={isPending} className="px-4 py-1 mt-2 disabled:bg-green-800 rounded-md bg-green-600 text-white font-semibold">Sign in</button>
+                <Link href="/register" className="underline text-blue-500">Don't have an account?</Link>
             </form>
         </div>
     )
