@@ -14,16 +14,23 @@ export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
     const {email ,password,name} = validated.data
     const sss = await createAdminClient()
     const account = await sss.getaccount()
-    const user = await account.create(ID.unique(),email,password,name)
-    const session = await account.createEmailPasswordSession(email,password)
-    cookies().set("custom-session",session.secret,{
-        path:"/",
-        httpOnly:true,
-        sameSite:"strict",
-        secure:true
-    })
-    if (user) {
-        redirect("/profile")
+    try {
+        const user = await account.create(ID.unique(),email,password,name)
+        const session = await account.createEmailPasswordSession(email,password)
+        cookies().set("custom-session",session.secret,{
+            path:"/",
+            httpOnly:true,
+            sameSite:"strict",
+            secure:true
+        })
+    } catch (error:any) {
+        console.log(error);
+        switch(error.type){
+            case "user_already_exists":
+                return{error:"Email already in use"}
+            default:
+                return{error:"Something went wrong"}
+        }
     }
-    return{error:"Something went wrong"}
+    redirect("/profile")
 }
