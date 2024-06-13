@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   }
   if (isAuthRoute) {
     if (user) {
-        return Response.redirect(new URL("/",request.url))
+        return Response.redirect(new URL("/profile",request.url))
     }
     return null
   }
