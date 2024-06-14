@@ -10,7 +10,6 @@ export async function GET(request : NextRequest) {
 
   const sss = await createAdminClient();
   const account = await sss.getaccount()
-  try {
       const session = await account.createSession(userId!, secret!);
       cookies().set("my-custom-session", session.secret, {
         path: "/",
@@ -18,8 +17,8 @@ export async function GET(request : NextRequest) {
         sameSite: "strict",
         secure: true,
       });
-  } catch (error) {
-    return NextResponse.redirect(`${request.nextUrl.origin}/login`)
-  }
+  
+    // return NextResponse.redirect(`${request.nextUrl.origin}/login`)
+
   return NextResponse.redirect(`${request.nextUrl.origin}/profile`);
 }
