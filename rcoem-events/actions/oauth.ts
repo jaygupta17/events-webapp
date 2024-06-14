@@ -2,19 +2,27 @@
 "use server";
 
 import { createAdminClient } from "@/appwrite/config";
-import { redirect  } from "next/navigation";
-import { headers } from "next/headers";
-import { OAuthProvider } from "node-appwrite";
+import { PhoneSchema } from "@/schemas";
+import { ID } from "node-appwrite";
+import { z } from "zod";
 
-export async function signUpWithGoogle() {
-	const {account} = await createAdminClient();
-    const origin = headers().get("origin");
-  
-	const redirectUrl = await account.createOAuth2Token(
-		OAuthProvider.Google,
-		`${origin}/oauth`,
-		`${origin}/register`,
-	);
-
-	return redirect(redirectUrl);
+export async function signUpWithPhone(values : z.infer<typeof PhoneSchema>) {
+	const {account} = await createAdminClient()
+	const validatedFields = PhoneSchema.safeParse(values)
+	if (!validatedFields.success) {
+		return {error:"Invalid Number"}
+	}
+	const { pnumber } = validatedFields.data
+	const token =await account.createPhoneToken(
+		ID.unique(),
+		"+91"+pnumber
+	)
+	return {success : "OTP sent"}
+	// const userId = token.userId
+	// console.log(token.secret);
+	
+	// const session = await account.createSession(
+	// 	userId,
+	// 	token.
+	// )
 };

@@ -1,5 +1,4 @@
 import { getLoggedInUser } from "@/appwrite/config";
-import { LoginForm } from "../_components/login-form";
 import { redirect } from "next/navigation";
 import PhoneLogin from "../_components/phone-form";
 
@@ -11,7 +10,7 @@ import PhoneLogin from "../_components/phone-form";
     }
     return(
         <div className="h-screen w-screen flex justify-center items-center flex-col bg-neutral-800">
-            <LoginForm/>
+            <PhoneLogin/>
         </div>
     )
 }

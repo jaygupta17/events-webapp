@@ -15,3 +15,7 @@ export const RegisterSchema = z.object({
     }),
     password :z.string().min(8,{message:"Password length should be 8 or more"})
 })
+
+export const PhoneSchema = z.object({
+    pnumber : z.string().max(10,{message:"Invalid Phone Number"}).min(10,{message:"Invalid Phone Number"})
+})
