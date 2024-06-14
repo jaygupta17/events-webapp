@@ -9,8 +9,8 @@ export async function GET(request : NextRequest) {
   const secret = request.nextUrl.searchParams.get("secret");
 
   const sss = await createAdminClient();
-  const account = await sss.getaccount()
-    try {
+  const account =  sss.getaccount()
+   
       const session = await account.createSession(userId!, secret!);
       cookies().set("my-custom-session", session.secret, {
         path: "/",
@@ -18,9 +18,7 @@ export async function GET(request : NextRequest) {
         sameSite: "strict",
         secure: true,
       });
-    } catch (error) {
-      throw error
-    }
+    
   
     // return NextResponse.redirect(`${request.nextUrl.origin}/login`)
 
