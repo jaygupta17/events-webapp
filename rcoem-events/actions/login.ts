@@ -1,10 +1,9 @@
 "use server"
 
-import { createAdminClient, createSessionClient, getLoggedInUser } from "@/appwrite/config"
-// import { account } from "@/appwrite/config"
+import { createAdminClient } from "@/appwrite/config"
 import { LoginSchema } from "@/schemas"
 import { cookies } from "next/headers"
-import { RedirectType, redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 import { z } from "zod"
 
 

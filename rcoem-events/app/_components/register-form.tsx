@@ -45,7 +45,7 @@ export const RegisterForm = () =>{
                 </div>
                <div className="flex flex-col gap-y-2">
                 <p className="text-white/90 tracking-wide">Password:</p>
-               <input {...register('password')} disabled={isPending} placeholder="password" className="outline-none disabled:bg-neutral-800 text-white/90 bg-white/10 rounded px-3 py-2"/>
+               <input {...register('password')} disabled={isPending} type="password" placeholder="password" className="outline-none disabled:bg-neutral-800 text-white/90 bg-white/10 rounded px-3 py-2"/>
                {errors.password?.message && <FieldError message={errors.password.message} />}
                </div>
                 <FormError message={error}/>
