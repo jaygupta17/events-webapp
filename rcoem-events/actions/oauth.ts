@@ -7,8 +7,7 @@ import { headers } from "next/headers";
 import { OAuthProvider } from "node-appwrite";
 
 export async function signUpWithGoogle() {
-	const sss = await createAdminClient();
-    const account = sss.getaccount()
+	const {account} = await createAdminClient();
     const origin = headers().get("origin");
   
 	const redirectUrl = await account.createOAuth2Token(
@@ -16,6 +15,7 @@ export async function signUpWithGoogle() {
 		`${origin}/oauth`,
 		`${origin}/register`,
 	);
-
+	
+	
 	return redirect(redirectUrl);
 };

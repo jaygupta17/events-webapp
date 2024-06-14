@@ -12,9 +12,7 @@ export const login = async (values:z.infer<typeof LoginSchema>)=>{
     const validated = LoginSchema.safeParse(values)
     if(!validated.success) return{error : validated.error.message}
     const {email ,password} = validated.data
-    const sss = await createAdminClient()
-    const account = await sss.getaccount()
-
+    const {account} = await createAdminClient()
     try {
         const session = await account.createEmailPasswordSession(email,password)
         cookies().set("custom-session",session.secret,{

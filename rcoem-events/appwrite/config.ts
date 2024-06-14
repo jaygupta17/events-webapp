@@ -20,7 +20,7 @@ export async function createSessionClient() {
     }
     client.setSession(session.value)
     return {
-        getaccount(){
+        get account(){
             return new Account(client)
         }
     }
@@ -34,13 +34,13 @@ export async function createAdminClient() {
     .setKey(process.env.NEXT_APPWRITE_KEY!);           
 
     return {
-        getaccount(){
+        get account(){
             return new Account(client)
         },
-        getdb(){
+        get db(){
             return new Databases(client)
         },
-        getusers(){
+        get users(){
             return new Users(client)
         }
     }
@@ -54,8 +54,8 @@ export async function createAdminClient() {
 
 export async function getLoggedInUser(){
     try {
-        const sss = await createSessionClient()
-        const account = sss.getaccount() 
+        const {account} = await createSessionClient()
+        // const account = sss.getaccount() 
        return await account.get()
     } catch (error) {
         return null

@@ -12,10 +12,7 @@ export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
     const validated = RegisterSchema.safeParse(values)
     if(!validated.success) return{error : validated.error.message}
     const {email ,password,name} = validated.data
-    const sss = await createAdminClient()
-    const account = await sss.getaccount()
-    const db = await sss.getdb()
-    const users = await sss.getusers()
+    const {account,db,users} = await createAdminClient()
     try {
         const user = await account.create(ID.unique(),email,password,name)
         // const  label = await users.updateLabels(user.$id , ["ORGANISER"])
