@@ -13,6 +13,8 @@ export async function signUpWithGoogle() {
   
 	const redirectUrl = await account.createOAuth2Token(
 		OAuthProvider.Google,
+		// "https://studious-eureka-4j75vjg9454wf6vj-3000.app.github.dev/oauth",
+		// "https://studious-eureka-4j75vjg9454wf6vj-3000.app.github.dev/register"
 		`${origin}/oauth`,
 		`${origin}/register`,
 	);

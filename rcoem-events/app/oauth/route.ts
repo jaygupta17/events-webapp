@@ -20,5 +20,5 @@ export async function GET(request : NextRequest) {
   
     // return NextResponse.redirect(`${request.nextUrl.origin}/login`)
 
-  return NextResponse.redirect(`${request.nextUrl.origin}/profile`);
+  return NextResponse.redirect(new URL("/profile" , request.nextUrl));
 }
