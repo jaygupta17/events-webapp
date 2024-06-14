@@ -19,3 +19,7 @@ export const RegisterSchema = z.object({
 export const PhoneSchema = z.object({
     pnumber : z.string().max(10,{message:"Invalid Phone Number"}).min(10,{message:"Invalid Phone Number"})
 })
+
+export const OTPSchema = z.object({
+    otp : z.string().max(6,{message:"Invalid OTP"}).min(6,{message:"Invalid OTP"})
+})
