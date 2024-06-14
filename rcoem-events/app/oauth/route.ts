@@ -4,7 +4,7 @@ import { createAdminClient } from "@/appwrite/config";
 import { cookies } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: any) {
   const userId = request.nextUrl.searchParams.get("userId");
   const secret = request.nextUrl.searchParams.get("secret");
 
