@@ -2,6 +2,7 @@
 
 import { createAdminClient, getLoggedInUser } from "@/appwrite/config"
 import { EventSchema } from "@/schemas"
+import { redirect } from "next/navigation"
 import { ID } from "node-appwrite"
 import { z } from "zod"
 
@@ -19,6 +20,7 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
         }
         console.log(validated.data);
         const {title,descr,date,fees}= validated.data
+        const fee = Number(fees)
         await db.createDocument(
             process.env.NEXT_APPWRITE_DB!,
             process.env.NEXT_APPWRITE_EVENTS!,
@@ -26,11 +28,11 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
             {
                 title,
                 descr,
-                fees,
+                fees:fee,
                 date,
-                organiser:user?.$id
+                organiser:user?.$id,
+                createdAt: Date.now().toString()
             }
         )
-        return {success: "wow"}
-    
+        redirect("/")    
 }

@@ -34,7 +34,7 @@ export function EventForm() {
         setError("")
         startTransition(()=>{
             createEvent(values).then(data=>{
-                if(data.error) setError(data.error)
+                if(data?.error) setError(data.error)
             })
         })
         
