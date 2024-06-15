@@ -15,7 +15,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-   cc
   return (
     <div>
         <Header/>
