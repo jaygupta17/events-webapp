@@ -17,7 +17,7 @@ export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
         const user = await account.create(ID.unique(),email,password,name)
         // const  label = await users.updateLabels(user.$id , ["ORGANISER"])
          console.log(user);
-        const udocument = await db.createDocument(process.env.NEXT_APPWRITE_DB! , process.env.NEXT_APPWRITE_USERS!,ID.unique(),{
+        const udocument = await db.createDocument(process.env.NEXT_APPWRITE_DB! , process.env.NEXT_APPWRITE_USERS!,user.$id,{
             "name" : user.name,
             "email":email,
             "id" : user.$id,

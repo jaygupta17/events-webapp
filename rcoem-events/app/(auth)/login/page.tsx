@@ -1,7 +1,6 @@
 import { getLoggedInUser } from "@/appwrite/config";
-import { LoginForm } from "../_components/login-form";
+import { LoginForm } from "@/app/_components/login-form";
 import { redirect } from "next/navigation";
-import PhoneLogin from "../_components/phone-form";
 
  export default async function page(){
     const user = await getLoggedInUser()

@@ -1,5 +1,5 @@
 import { getLoggedInUser } from "@/appwrite/config";
-import { RegisterForm } from "../_components/register-form";
+import { RegisterForm } from "@/app/_components/register-form";
 import { redirect } from "next/navigation";
 
  export default async function page(){
