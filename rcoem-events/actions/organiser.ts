@@ -48,5 +48,5 @@ export const createOrganiser = async (values:z.infer<typeof OrganiserSchema>)=>{
                 return{error:"Something went wrong"}
         }
     }
-    redirect("/profile")
+    redirect("/")
 }

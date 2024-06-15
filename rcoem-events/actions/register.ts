@@ -48,5 +48,5 @@ export const signup = async (values:z.infer<typeof RegisterSchema>)=>{
                 return{error:"Something went wrong"}
         }
     }
-    redirect("/profile")
+    redirect("/")
 }
