@@ -1,0 +1,9 @@
+1. Upload thumbnail
+2. createUrl
+3. Add url to event document
+4. event/organiser document level permissions
+5. Event modal on clcking card : for more information
+6. profile section for user
+    name, email, preference, following, updateDetails section
+7. profile section for clubs
+    name, email, bio, followers, updateDetails, events[list] : create,read,update,delete

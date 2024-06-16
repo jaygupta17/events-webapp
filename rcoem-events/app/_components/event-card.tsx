@@ -9,6 +9,7 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import { Building, Building2, Calendar } from "lucide-react";
+import { CldUploadButton } from "next-cloudinary";
 import Image from "next/image";
 import Link from "next/link";
   
@@ -29,11 +30,10 @@ export function EventCard({title,organiser,image,date,url}: EventCardProps) {
                     <Image
                         src="/Penguins.jpg"
                         alt="Penquin"
-                        // fill
                         width={500}
                         height={100}
-                        
                     />
+      
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
                     <CardDescription className="flex gap-x-2">{organiser}</CardDescription>
