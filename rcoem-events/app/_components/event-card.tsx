@@ -19,10 +19,11 @@ interface EventCardProps{
     organiser: string;
     image:string;
     date: string;
-    url:string
+    url:string;
+    fees:number
 }
 
-export function EventCard({title,organiser,image,date,url}: EventCardProps) {
+export function EventCard({title,organiser,image,date,url,fees}: EventCardProps) {
 
     return(
         <div className="flex w-[90%] md:w-[40%] rounded-[20px] overflow-hidden">
@@ -36,12 +37,15 @@ export function EventCard({title,organiser,image,date,url}: EventCardProps) {
                     />
       
                 <CardHeader>
-                    <CardTitle>{title}</CardTitle>
+                    <CardTitle className="flex justify-between items-center">
+                        <div>{title}</div>
+                        <div className={fees? "px-3 py-1 text-[14px] tracking-normal rounded-[20px]" : "px-3 py-1 text-[14px] tracking-normal bg-green-600 rounded-[20px]"}>{fees ? <span>&#8377; {fees+"/-"}</span> : "free"}</div>
+                    </CardTitle>
                     <CardDescription className="flex gap-x-2">{organiser}</CardDescription>
                     <CardDescription className="pt-3 flex gap-x-2 text-[16px]"><Calendar size={20}/> {date}</CardDescription>
                 </CardHeader>
                 <CardFooter>
-                    <Button variant="default"><Link href="/">Register</Link></Button>
+                    <Button variant="default" className="text-white"><Link href="/">Register</Link></Button>
                 </CardFooter>
             </Card>
         </div>

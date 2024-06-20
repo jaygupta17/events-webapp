@@ -42,6 +42,12 @@ import { Button } from "@/components/ui/button"
                        <Info/> About
                     </Link>
                 </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                  <DropdownMenuLabel>
+                   <Link href="/contact" className={"/contact"==path? "text-white/90 text-xl flex gap-x-2" : "text-xl text-white/70 flex gap-x-2" }>
+                       <Info/> Contact
+                    </Link>
+                </DropdownMenuLabel>
   </DropdownMenuContent>
         </DropdownMenu>
     )
