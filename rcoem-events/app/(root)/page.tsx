@@ -45,8 +45,9 @@ export default async function page() {
     const user = await getLoggedInUser()
 if(!user) redirect("/login")
     if(user.labels.includes("ORGANISER")){const {db}= await createAdminClient()
-    const organiser =await db.getDocument(process.env.NEXT_APPWRITE_DB!,process.env.NEXT_APPWRITE_ORGANISER!,user.$id) ;
-    console.log(organiser);}
+    const events =await db.listDocuments(process.env.NEXT_APPWRITE_DB!,process.env.NEXT_APPWRITE_EVENTS!,[
+        Query.orderDesc('createdAt')
+    ]) ;
     return(
         <div className="flex justify-center items-center gap-y-2 py-4 flex-col">
             {user.labels.includes("ORGANISER") && <Link href="/create-event" className="flex justify-center rounded-full font-semibold fixed bottom-10 right-4 p-3 bg-blue-500/70"><PlusIcon className="text-white/80" size={35}/></Link> }
