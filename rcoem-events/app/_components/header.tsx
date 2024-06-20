@@ -1,8 +1,9 @@
 "use client"
 import Link from "next/link";
 import { NavSheet } from "./navsheet";
-import { ModeToggle } from "./toogle-theme";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { logout } from "@/actions/logout";
 
 
 const navLinks = [
@@ -41,7 +42,11 @@ export function Header() {
                             </li>
                         ))}
                     </ul>
-                <ModeToggle/>
+                    <form action={logout}>
+      <button type="submit"><Button variant="outline">
+            Sign out
+          </Button></button>
+      </form>
             </div>
         </div>
     )

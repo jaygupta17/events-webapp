@@ -52,6 +52,7 @@ export async function createAdminClient() {
 
 //   export const account = new Account(adminClient)
 
+
 export async function getLoggedInUser(){
     try {
         const {account} = await createSessionClient()
