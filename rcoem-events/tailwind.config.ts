@@ -41,8 +41,8 @@ const config = {
           foreground: "#ffffff80", //date 
         },
         accent: {
-          DEFAULT: "#ff0000",
-          foreground: "#00ff00",
+          DEFAULT: "#ffffff80",
+          foreground: "#ffffff90",
         },
         popover: {
           DEFAULT: "#1a1625", //toggle and menu bar bg
