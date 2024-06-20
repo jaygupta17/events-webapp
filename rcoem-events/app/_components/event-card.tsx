@@ -25,13 +25,14 @@ interface EventCardProps{
 export function EventCard({title,organiser,image,date,url}: EventCardProps) {
 
     return(
-        <div className="flex w-[90%] rounded-[20px] overflow-hidden">
+        <div className="flex w-[90%] md:w-[40%] rounded-[20px] overflow-hidden">
             <Card className="w-full rounded-[20px]">
                     <Image
                         src="/Penguins.jpg"
                         alt="Penquin"
                         width={500}
                         height={100}
+                        className="w-full"
                     />
       
                 <CardHeader>
