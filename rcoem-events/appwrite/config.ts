@@ -1,11 +1,4 @@
-// import { Account, Client } from "appwrite";
-// const client = new Client();
-
-// client
-//     .setEndpoint('https://cloud.appwrite.io/v1')
-//     .setProject('666a70150006c139d9d6')
-
-// export const account = new Account(client);
+"use server"
 
 import { Account, Client, Databases, Users } from "node-appwrite"; // Using the server SDK
 import { cookies } from "next/headers";
@@ -60,4 +53,12 @@ export async function getLoggedInUser(){
     } catch (error) {
         return null
     }
+}
+export const DeleteEvent=async (id:string) =>{
+    const {db} = await createAdminClient();
+    const event =await db.deleteDocument(
+        process.env.NEXT_APPWRITE_DB!,
+        process.env.NEXT_APPWRITE_EVENTS!,
+        id
+    )
 }
