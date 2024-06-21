@@ -6,7 +6,6 @@ import { EventCard } from "../_components/event-card";
 import { Query } from "node-appwrite";
 import { dateToGood } from "@/lib/utils";
 
-
 export default async function page() {
     
     const user = await getLoggedInUser()

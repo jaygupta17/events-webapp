@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { CldUploadButton } from "next-cloudinary";
-
+import Image from "next/image";
 import {
     Form,
     FormControl,
@@ -19,8 +19,10 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useTransition } from "react"
 import { createEvent } from "@/actions/event"
+import { UploadButton } from "@/utils/uploadthing"
 export function EventForm() {
     const [isPending, startTransition] = useTransition()
+    const [image, setImage] = useState("/Penguins.jpg")
     const [error , setError] = useState<string | undefined>("")
     const form = useForm<z.infer<typeof EventSchema>>({
         resolver: zodResolver(EventSchema),
@@ -125,6 +127,25 @@ export function EventForm() {
             </FormItem>
           )}
         /> */}
+         <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          setImage(res[0].url)
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
+      <Image 
+      src={image}
+      width={20}
+      height={20}
+      alt="Img"
+      />
         <div className="text-red-400">{error}</div>
         <Button className="bg-blue-500/70 font-semibold tracking-wide px-7  text-white" disabled={isPending} type="submit">Create</Button>
       </form>

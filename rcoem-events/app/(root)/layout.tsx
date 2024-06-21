@@ -3,6 +3,7 @@ import "../globals.css";
 import { getLoggedInUser } from "@/appwrite/config";
 import { redirect } from "next/navigation";
 import { Header } from "../_components/header";
+import "@uploadthing/react/styles.css";
 
 
 export const metadata: Metadata = {
