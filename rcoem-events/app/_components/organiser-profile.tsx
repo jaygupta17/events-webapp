@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { dateToGood } from "../(root)/page";
+import { dateToGood } from "@/lib/utils";
 import { createAdminClient } from "@/appwrite/config";
 import { DeleteBtn } from "./deleteBtn";
 
