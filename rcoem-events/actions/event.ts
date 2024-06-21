@@ -50,4 +50,5 @@ export const upload = async(id:string , image:string) =>{
             img : image
         }
     )
+    redirect("/")    
 }

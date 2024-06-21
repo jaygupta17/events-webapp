@@ -44,7 +44,6 @@ export function EventForm() {
                 if(data?.error) setError(data.error)
                   if(data?.id) {
                     upload(data.id,image).then(res=>res)
-        redirect("/")    
                   }
             })
         })
