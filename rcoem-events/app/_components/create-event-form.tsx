@@ -18,7 +18,7 @@ import {
   import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useTransition } from "react"
-import { createEvent } from "@/actions/event"
+import { createEvent, upload } from "@/actions/event"
 import { UploadButton } from "@/utils/uploadthing"
 export function EventForm() {
     const [isPending, startTransition] = useTransition()
@@ -36,13 +36,15 @@ export function EventForm() {
 
        function onSubmit(values: z.infer<typeof EventSchema>) {
         setError("")
-        const {img} =values;
-        if (img=="") {
+        if (image == "/Penguins.jpg") {
           return setError("File is required")
         }
         startTransition(()=>{
             createEvent(values).then(data=>{
                 if(data?.error) setError(data.error)
+                  if(data?.id) {
+                    upload(data.id,image).then(res=>res)
+                  }
             })
         })
         console.log(values)
@@ -104,21 +106,6 @@ export function EventForm() {
             </FormItem>
           )}
         />
-         <div className="">
-         <FormField
-          control={form.control}
-          name="img"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>File</FormLabel>
-              <FormControl>
-                <Input  disabled={true} type="text" {...field} value={image}/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         </div>
          <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {

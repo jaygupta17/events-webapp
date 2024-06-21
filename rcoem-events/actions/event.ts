@@ -19,9 +19,9 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
             return {error: "Invalid Data"}
         }
         console.log(validated.data);
-        const {title,descr,date,fees , img}= validated.data
+        const {title,descr,date,fees}= validated.data
         const fee = Number(fees)
-        await db.createDocument(
+        const doc = await db.createDocument(
             process.env.NEXT_APPWRITE_DB!,
             process.env.NEXT_APPWRITE_EVENTS!,
             ID.unique(),
@@ -32,8 +32,23 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
                 date,
                 organiser:user?.$id,
                 createdAt: Date.now().toString(),
-                img
             }
         )
+        return{
+            error:"",
+            id : doc.$id
+        }
         redirect("/")    
+}
+
+export const upload = async(id:string , image:string) =>{
+    const {db} = await createAdminClient()
+    db.updateDocument(
+        process.env.NEXT_APPWRITE_DB!,
+        process.env.NEXT_APPWRITE_EVENTS!,
+        id,
+        {
+            img : image
+        }
+    )
 }
