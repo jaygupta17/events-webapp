@@ -120,8 +120,8 @@ export function EventForm() {
       <Image 
       src={image}
       className="w-full aspect-square"
-      width={20}
-      height={20}
+      width={200}
+      height={200}
       alt="Img"
       />
         <Button className="bg-blue-500/70 font-semibold tracking-wide px-7  text-white" disabled={isPending} type="submit">Create</Button>
