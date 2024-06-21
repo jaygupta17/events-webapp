@@ -37,7 +37,7 @@ export function EventForm() {
        function onSubmit(values: z.infer<typeof EventSchema>) {
         setError("")
         const {img} =values;
-        if (!img) {
+        if (img=="") {
           return setError("File is required")
         }
         startTransition(()=>{
