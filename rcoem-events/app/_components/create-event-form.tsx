@@ -5,7 +5,6 @@ import { EventSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { CldUploadButton } from "next-cloudinary";
 import Image from "next/image";
 import {
     Form,
@@ -20,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useState, useTransition } from "react"
 import { createEvent, upload } from "@/actions/event"
 import { UploadButton } from "@/utils/uploadthing"
+import { redirect } from "next/navigation"
 export function EventForm() {
     const [isPending, startTransition] = useTransition()
     const [image, setImage] = useState("/Penguins.jpg")
@@ -44,6 +44,7 @@ export function EventForm() {
                 if(data?.error) setError(data.error)
                   if(data?.id) {
                     upload(data.id,image).then(res=>res)
+        redirect("/")    
                   }
             })
         })

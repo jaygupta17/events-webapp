@@ -38,7 +38,6 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
             error:"",
             id : doc.$id
         }
-        redirect("/")    
 }
 
 export const upload = async(id:string , image:string) =>{
