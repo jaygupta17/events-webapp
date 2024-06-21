@@ -31,11 +31,14 @@ export function EventForm() {
             descr :"",
             date:"",
             fees : "",
+            img:image
         },
       })
 
        function onSubmit(values: z.infer<typeof EventSchema>) {
         setError("")
+        const {img} = values;
+        if(img == "/Penguins.jpg") return setError("File is required");
         startTransition(()=>{
             createEvent(values).then(data=>{
                 if(data?.error) setError(data.error)
@@ -101,52 +104,23 @@ export function EventForm() {
             </FormItem>
           )}
         />
-         {/* <FormField
-          control={form.control}
-          name="image"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Thumbnail / Poster</FormLabel>
-              <FormControl>
-              <Input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
-        {/* <FormField
-          control={form.control}
-          name="organiser"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="hidden">Organiser</FormLabel>
-              <FormControl>
-                <Input disabled={true} className="hidden" type="text" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
          <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
-          // Do something with the response
-          console.log("Files: ", res);
           setImage(res[0].url)
-          alert("Upload Completed");
         }}
         onUploadError={(error: Error) => {
-          // Do something with the error.
           alert(`ERROR! ${error.message}`);
         }}
       />
+        <div className="text-red-400">{error}</div>
       <Image 
       src={image}
+      className="w-full aspect-square"
       width={20}
       height={20}
       alt="Img"
       />
-        <div className="text-red-400">{error}</div>
         <Button className="bg-blue-500/70 font-semibold tracking-wide px-7  text-white" disabled={isPending} type="submit">Create</Button>
       </form>
     </Form>

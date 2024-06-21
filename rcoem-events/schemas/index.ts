@@ -13,13 +13,7 @@ export const EventSchema = z.object({
     descr : z.string().max(600,{message:"Description cant exceed 600 characters"}),
     date : z.string(),
     fees: z.string().min(1,{message:"Fee is required"}),
-    // image: z
-    // .any()
-    // .refine((file) => file?.size <= 1000000, `Max image size is 5MB.`)
-    // .refine(
-    //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-    //   "Only .jpg, .jpeg, .png and .webp formats are supported."
-    // )
+    img:z.string()
 })
 
 export const LoginSchema = z.object({

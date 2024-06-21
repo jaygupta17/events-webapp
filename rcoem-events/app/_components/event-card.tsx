@@ -17,25 +17,23 @@ import Link from "next/link";
 interface EventCardProps{
     title:string;
     organiser: string;
-    image:string;
     date: string;
-    url:string;
+    img:string;
     fees:number
 }
 
-export function EventCard({title,organiser,image,date,url,fees}: EventCardProps) {
+export function EventCard({title,organiser,date,img,fees}: EventCardProps) {
 
     return(
         <div className="flex w-[90%] md:w-[40%] rounded-[20px] overflow-hidden">
             <Card className="w-full rounded-[20px]">
                     <Image
-                        src="/Penguins.jpg"
+                        src={img || "/Penguins.jpg"}
                         alt="Penquin"
                         width={500}
                         height={100}
                         className="w-full"
                     />
-      
                 <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                         <div>{title}</div>
