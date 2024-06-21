@@ -31,20 +31,20 @@ export function EventForm() {
             descr :"",
             date:"",
             fees : "",
-            img:image
         },
       })
 
        function onSubmit(values: z.infer<typeof EventSchema>) {
         setError("")
-        const {img} = values;
-        if(img == "/Penguins.jpg") return setError("File is required");
+        const {img} =values;
+        if (!img) {
+          return setError("File is required")
+        }
         startTransition(()=>{
             createEvent(values).then(data=>{
                 if(data?.error) setError(data.error)
             })
         })
-        
         console.log(values)
       }
     return(
@@ -104,13 +104,29 @@ export function EventForm() {
             </FormItem>
           )}
         />
+         <div className="hidden">
+         <FormField
+          control={form.control}
+          name="img"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>File</FormLabel>
+              <FormControl>
+                <Input  disabled={true} type="text" {...field} value={image}/>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         </div>
          <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           setImage(res[0].url)
+          setError("")
         }}
         onUploadError={(error: Error) => {
-          alert(`ERROR! ${error.message}`);
+          setError(`ERROR! ${error.message}`);
         }}
       />
         <div className="text-red-400">{error}</div>
