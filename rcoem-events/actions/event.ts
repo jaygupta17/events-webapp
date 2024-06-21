@@ -42,7 +42,7 @@ export const createEvent = async (values: z.infer<typeof EventSchema>) => {
 
 export const upload = async(id:string , image:string) =>{
     const {db} = await createAdminClient()
-    db.updateDocument(
+    await db.updateDocument(
         process.env.NEXT_APPWRITE_DB!,
         process.env.NEXT_APPWRITE_EVENTS!,
         id,
