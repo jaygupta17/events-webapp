@@ -19,7 +19,7 @@ export default async function Home() {
     return (
       <div className="py-9  relative w-screen flex justify-center items-center flex-col">    
                   {user.labels.includes("ORGANISER") && <Link href="/create-event" className="flex justify-center rounded-full font-semibold fixed bottom-10 right-4 p-3 bg-blue-500/70"><PlusIcon className="text-white/80" size={35}/></Link> } 
-                  {user.labels.includes("ORGANISER") ? <OrganiserProfile events={organiser!.events} name={organiser!.name} email={organiser!.email} bio="jay" img={organiser!.img || "/Penguins.jpg"}/> :<p>you are a User</p>}      
+                  {user.labels.includes("ORGANISER") ? <OrganiserProfile events={organiser!.events} name={organiser!.name} email={organiser!.email} bio={organiser!.bio} img={organiser!.img || "/Penguins.jpg"}/> :<p>you are a User</p>}      
       </div>
     ); 
 }
