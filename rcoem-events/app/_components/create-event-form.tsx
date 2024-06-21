@@ -104,7 +104,7 @@ export function EventForm() {
             </FormItem>
           )}
         />
-         <div className="hidden">
+         <div className="">
          <FormField
           control={form.control}
           name="img"
